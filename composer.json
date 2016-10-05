@@ -1,0 +1,20 @@
+{
+    "name": "gverschuur/laravel-robotstxt",
+    "description": "Set the robots.txt content dynamically based on the Laravel app environment.",
+    "keywords": ["php", "laravel", "robots.txt"],
+    "authors": [
+        {
+            "name": "Govert Verschuur",
+            "email": "govert.verschuur@gmail.com"
+        }
+    ],
+    "require": {
+        "laravel/framework": "^5.2"
+    },
+    "autoload": {
+        "psr-4": {
+            "Gverschuur\\RobotsTxt\\": "src/"
+        }
+    },
+    "license": "MIT"
+}
