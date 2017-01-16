@@ -1,16 +1,14 @@
 <h1>Dynamic robots.txt ServiceProvider for Laravel</h1>
 
-[TOC]
-
 ## Installation
 
-    composer require gverschuur/laravel-robotstxt
+    composer require verschuur/laravel-robotstxt
 
 or add the following to your `composer.json`
 
     {
         "require": {
-            "gverschuur/laravel-robotstxt": "^1.0"
+            "verschuur/laravel-robotstxt": "^1.0"
         }
     }
 
@@ -87,4 +85,4 @@ This package is compatible with Laravel 5.2 and 5.3.
 ## Testing
 PHPUnit test cases are provided in `/tests`. Due to way this package interacts with Laravel, tests should be run from the Laravel root folder
 
-    phpunit vendor/gverschuur/laravel-robotstxt/tests
+    phpunit vendor/verschuur/laravel-robotstxt/tests

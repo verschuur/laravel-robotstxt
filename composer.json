@@ -1,5 +1,5 @@
 {
-    "name": "gverschuur/laravel-robotstxt",
+    "name": "verschuur/laravel-robotstxt",
     "description": "Set the robots.txt content dynamically based on the Laravel app environment.",
     "keywords": ["php", "laravel", "robots.txt"],
     "authors": [
