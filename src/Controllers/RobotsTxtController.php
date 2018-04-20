@@ -1,7 +1,7 @@
 <?php
 namespace Gverschuur\RobotsTxt\Controllers;
 
-use App\Http\Controllers\Controller;
+use Illuminate\Routing\Controller;
 
 class RobotsTxtController extends Controller
 {
