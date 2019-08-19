@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "5fa81d6be757bb999bf6aa55268d547f",
+    "content-hash": "fdd1d788cdddaedbe2b7d6a12d2355f2",
     "packages": [
         {
             "name": "doctrine/inflector",
@@ -4172,6 +4172,40 @@
             "description": "Library that helps with managing the version number of Git-hosted PHP projects",
             "homepage": "https://github.com/sebastianbergmann/version",
             "time": "2016-10-03T07:35:21+00:00"
+        },
+        {
+            "name": "sempro/phpunit-pretty-print",
+            "version": "1.1.10",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/sempro/phpunit-pretty-print.git",
+                "reference": "7449efe3c2d4abdf32082caef7ba2b055194bd46"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/sempro/phpunit-pretty-print/zipball/7449efe3c2d4abdf32082caef7ba2b055194bd46",
+                "reference": "7449efe3c2d4abdf32082caef7ba2b055194bd46",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.1.0",
+                "phpunit/phpunit": ">=7.0.0"
+            },
+            "require-dev": {
+                "friendsofphp/php-cs-fixer": "^2.15"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Sempro\\PHPUnitPrettyPrinter\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Prettify PHPUnit output",
+            "time": "2019-08-12T07:08:01+00:00"
         },
         {
             "name": "theseer/tokenizer",
