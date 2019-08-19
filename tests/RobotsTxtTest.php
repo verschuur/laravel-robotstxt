@@ -1,5 +1,7 @@
 <?php
 
+namespace Verschuur\Laravel\RobotsTxt\Tests;
+
 use Verschuur\Laravel\RobotsTxt\Controllers\RobotsTxtController;
 use Verschuur\Laravel\RobotsTxt\RobotsTxtProvider;
 use Orchestra\Testbench\TestCase;

@@ -16,6 +16,11 @@
             "Verschuur\\Laravel\\RobotsTxt\\": "src/"
         }
     },
+    "autoload-dev": {
+        "psr-4": {
+            "Verschuur\\Laravel\\RobotsTxt\\Tests\\": "tests/"
+        }
+    },
     "license": "MIT",
     "require-dev": {
         "phpunit/phpunit": "^8.3",
