@@ -2,6 +2,7 @@
 
 use Gverschuur\RobotsTxt\Controllers\RobotsTxtController;
 use Gverschuur\RobotsTxt\RobotsTxtProvider;
+use Orchestra\Testbench\TestCase;
 
 class RobotsTxtTest extends TestCase {
 
