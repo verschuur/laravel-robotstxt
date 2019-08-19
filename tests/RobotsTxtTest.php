@@ -1,7 +1,7 @@
 <?php
 
-use Gverschuur\RobotsTxt\Controllers\RobotsTxtController;
-use Gverschuur\RobotsTxt\RobotsTxtProvider;
+use Verschuur\Laravel\RobotsTxt\Controllers\RobotsTxtController;
+use Verschuur\Laravel\RobotsTxt\RobotsTxtProvider;
 use Orchestra\Testbench\TestCase;
 
 class RobotsTxtTest extends TestCase

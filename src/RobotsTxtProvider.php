@@ -1,5 +1,5 @@
 <?php
-namespace Gverschuur\RobotsTxt;
+namespace Verschuur\Laravel\RobotsTxt;
 
 use Illuminate\Support\ServiceProvider;
 
@@ -25,7 +25,7 @@ class RobotsTxtProvider extends ServiceProvider
     public function register()
     {
         include __DIR__ . '/routes.php';
-        $this->app->make('Gverschuur\RobotsTxt\Controllers\RobotsTxtController');
+        $this->app->make('Verschuur\Laravel\RobotsTxt\Controllers\RobotsTxtController');
 
         $this->mergeConfigFrom(__DIR__.'/../config/robots-txt.php', 'robots-txt');
     }

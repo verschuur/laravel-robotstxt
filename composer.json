@@ -13,7 +13,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Gverschuur\\RobotsTxt\\": "src/"
+            "Verschuur\\Laravel\\RobotsTxt\\": "src/"
         }
     },
     "license": "MIT",

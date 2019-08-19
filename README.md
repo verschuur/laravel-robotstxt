@@ -14,7 +14,7 @@ or add the following to your `composer.json`
 
 After updating Composer, add the ServiceProvider to the providers array in `config/app.php`.
 
-     Gverschuur\RobotsTxt\RobotsTxtProvider::class
+     Verschuur\Laravel\RobotsTxt\RobotsTxtProvider::class
 
 ## Usage
 
@@ -36,7 +36,7 @@ This will allow a basic install to allow all robots on a production install, whi
 ### Custom settings
 If you need custom settings, publish the configuration file
 
-    php artisan vendor:publish --provider="Gverschuur\RobotsTxt\RobotsTxtProvider"
+    php artisan vendor:publish --provider="Verschuur\Laravel\RobotsTxt\RobotsTxtProvider"
 
 This will copy `robots-txt.php` to your app's `config` folder, allowing you fine-grained control over which paths to disallow for which environment and robot. In this file you will find the following array structure
 

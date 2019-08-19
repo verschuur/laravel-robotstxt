@@ -1,5 +1,5 @@
 <?php
-namespace Gverschuur\RobotsTxt\Controllers;
+namespace Verschuur\Laravel\RobotsTxt\Controllers;
 
 use Illuminate\Routing\Controller;
 
