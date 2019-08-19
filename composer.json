@@ -29,7 +29,7 @@
         "phpstan/phpstan": "^0.11.15"
     },
     "scripts": {
-        "test": "php vendor/bin/phpunit --configuration phpunit.xml --colors=always"
+        "test": "vendor/bin/phpunit --configuration phpunit.xml --colors=always",
         "stan": "vendor/bin/phpstan analyse src tests"
     }
 }
