@@ -4,12 +4,14 @@ use Gverschuur\RobotsTxt\Controllers\RobotsTxtController;
 use Gverschuur\RobotsTxt\RobotsTxtProvider;
 use Orchestra\Testbench\TestCase;
 
-class RobotsTxtTest extends TestCase {
+class RobotsTxtTest extends TestCase
+{
 
     /**
      * Test that given an environment of 'production', it returns the default allow all
      */
-    public function testItReturnsDefaultResponseForProductionEnv() {
+    public function testItReturnsDefaultResponseForProductionEnv()
+    {
         config(['app.env' => 'production']);
         $this->visit('/robots.txt')
              ->see('User-agent: *')
@@ -20,7 +22,8 @@ class RobotsTxtTest extends TestCase {
     /**
      * Test that given any other environment than 'production', it returns the default allow none
      */
-    public function testItReturnsDefaultResponseForNonProductionEnv() {
+    public function testItReturnsDefaultResponseForNonProductionEnv()
+    {
         config(['app.env' => 'staging']);
         $this->visit('/robots.txt')
              ->see('User-agent: *' . PHP_EOL . 'Disallow: /')
@@ -30,7 +33,8 @@ class RobotsTxtTest extends TestCase {
     /**
      * Test that custom paths will overwrite the defaults
      */
-    public function testItShowCustomSetPaths() {
+    public function testItShowCustomSetPaths()
+    {
         $paths = [
             'production' => [
                 '*' => [
@@ -52,7 +56,8 @@ class RobotsTxtTest extends TestCase {
     /**
      * Test that given multiple user agents, it will return multiple user agent entries
      */
-    public function testItShowMultipleUserAgents() {
+    public function testItShowMultipleUserAgents()
+    {
         $paths = [
             'production' => [
                 'bot1' => [],
@@ -73,9 +78,11 @@ class RobotsTxtTest extends TestCase {
     }
 
     /**
-     * Test that given multiple paths for a user agent, it will return multiple path entries for a single user agent entry
+     * Test that given multiple paths for a user agent,
+     * it will return multiple path entries for a single user agent entry
      */
-    public function testItShowMultiplePathsPerAgent() {
+    public function testItShowMultiplePathsPerAgent()
+    {
         $paths = [
             'production' => [
                 '*' => [
@@ -97,9 +104,11 @@ class RobotsTxtTest extends TestCase {
     }
 
     /**
-     * Test that given multiple paths for multiple user agents, it will return multiple path entries for multiple user agent entries
+     * Test that given multiple paths for multiple user agents,
+     * it will return multiple path entries for multiple user agent entries
      */
-    public function testItShowMultiplePathsForMultipleAgents() {
+    public function testItShowMultiplePathsForMultipleAgents()
+    {
         $paths = [
             'production' => [
                 '*' => [
@@ -128,7 +137,8 @@ class RobotsTxtTest extends TestCase {
     /**
      * Test that given multiple environments, it returns the correct path for the given environment
      */
-    public function testItShowsCorrectPathsForMultipleEnvironments() {
+    public function testItShowsCorrectPathsForMultipleEnvironments()
+    {
         $paths = [
             'production' => [
                 '*' => [
