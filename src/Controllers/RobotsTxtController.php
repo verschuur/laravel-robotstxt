@@ -19,7 +19,7 @@ class RobotsTxtController extends Controller
     /**
      * By default, the production environment allows all, and every other environment allows none
      * Custom paths can be set by publishing and editing the config file
-     * @return Illuminate\Http\Response HTTP status 200 with a text/plain content type robots.txt output
+     * @return \Illuminate\Http\Response HTTP status 200 with a text/plain content type robots.txt output
      */
     public function index()
     {
@@ -53,7 +53,8 @@ class RobotsTxtController extends Controller
         }
 
         // output the entire robots.txt
-        return \Response::make($robots, 200, ['content-type' => 'text/plain; charset=UTF-8']);
+        return response($robots, 200)
+            ->header('Content-Type', 'text/plain; charset=UTF-8');
     }
 
     /**
