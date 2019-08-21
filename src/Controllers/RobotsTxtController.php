@@ -8,15 +8,6 @@ use Verschuur\Laravel\RobotsTxt\RobotsTxtManager as Manager;
 
 class RobotsTxtController extends Controller
 {
-    /*
-    |--------------------------------------------------------------------------
-    | Robots Controller
-    |--------------------------------------------------------------------------
-    |
-    | Returns the correct content for a robots.txt based on the environment.
-    |
-    */
-
     /**
      * By default, the production environment allows all, and every other environment allows none
      * Custom paths can be set by publishing and editing the config file
