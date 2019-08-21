@@ -31,5 +31,12 @@
     "scripts": {
         "test": "vendor/bin/phpunit --configuration phpunit.xml --colors=always",
         "stan": "vendor/bin/phpstan analyse src tests"
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Verschuur\\Laravel\\RobotsTxt\\Providers\\RobotsTxtProvider"
+            ]
+        }
     }
 }
