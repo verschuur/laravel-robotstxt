@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace Verschuur\Laravel\RobotsTxt;
+namespace Verschuur\Laravel\RobotsTxt\Providers;
 
 use Illuminate\Support\ServiceProvider;
 
@@ -15,7 +15,7 @@ class RobotsTxtProvider extends ServiceProvider
     public function boot()
     {
          $this->publishes([
-            __DIR__.'/../config/robots-txt.php' => config_path('robots-txt.php'),
+            __DIR__.'/../../config/robots-txt.php' => config_path('robots-txt.php'),
          ]);
     }
 
@@ -26,9 +26,9 @@ class RobotsTxtProvider extends ServiceProvider
      */
     public function register()
     {
-        include __DIR__ . '/routes.php';
+        include __DIR__ . '/../routes.php';
         $this->app->make('Verschuur\Laravel\RobotsTxt\Controllers\RobotsTxtController');
 
-        $this->mergeConfigFrom(__DIR__.'/../config/robots-txt.php', 'robots-txt');
+        $this->mergeConfigFrom(__DIR__.'/../../config/robots-txt.php', 'robots-txt');
     }
 }

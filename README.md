@@ -14,7 +14,7 @@ or add the following to your `composer.json`
 
 After updating Composer, add the ServiceProvider to the providers array in `config/app.php`.
 
-     Verschuur\Laravel\RobotsTxt\RobotsTxtProvider::class
+     Verschuur\Laravel\RobotsTxt\Providers\RobotsTxtProvider::class
 
 ## Usage
 

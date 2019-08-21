@@ -204,6 +204,6 @@ class RobotsTxtTest extends TestCase
 
     protected function getPackageProviders($app)
     {
-        return [\Verschuur\Laravel\RobotsTxt\RobotsTxtProvider::class];
+        return [\Verschuur\Laravel\RobotsTxt\Providers\RobotsTxtProvider::class];
     }
 }
