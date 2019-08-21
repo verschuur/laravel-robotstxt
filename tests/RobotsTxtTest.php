@@ -11,7 +11,7 @@ class RobotsTxtTest extends TestCase
     /**
      * Test that given an environment of 'production', it returns the default allow all
      */
-    public function testItReturnsDefaultResponseForProductionEnv()
+    public function testHasDefaultResponseForProductionEnv()
     {
         $this->app['config']->set('app.env', 'production');
 
@@ -27,7 +27,7 @@ class RobotsTxtTest extends TestCase
     /**
      * Test that given any other environment than 'production', it returns the default allow none
      */
-    public function testItReturnsDefaultResponseForNonProductionEnv()
+    public function testHasDefaultResponseForNonProductionEnv()
     {
         $this->app['config']->set('app.env', 'staging');
 
@@ -40,7 +40,7 @@ class RobotsTxtTest extends TestCase
     /**
      * Test that custom paths will overwrite the defaults
      */
-    public function testItShowCustomSetPaths()
+    public function testShowsCustomSetPaths()
     {
         $paths = [
             'production' => [
@@ -62,7 +62,7 @@ class RobotsTxtTest extends TestCase
     /**
      * Test that given multiple user agents, it will return multiple user agent entries
      */
-    public function testItShowMultipleUserAgents()
+    public function testShowsMultipleUserAgents()
     {
         $paths = [
             'production' => [
@@ -88,7 +88,7 @@ class RobotsTxtTest extends TestCase
      * Test that given multiple paths for a user agent,
      * it will return multiple path entries for a single user agent entry
      */
-    public function testItShowMultiplePathsPerAgent()
+    public function testShowsMultiplePathsPerAgent()
     {
         $paths = [
             'production' => [
@@ -117,7 +117,7 @@ class RobotsTxtTest extends TestCase
      * Test that given multiple paths for multiple user agents,
      * it will return multiple path entries for multiple user agent entries
      */
-    public function testItShowMultiplePathsForMultipleAgents()
+    public function testShowsMultiplePathsForMultipleAgents()
     {
         $paths = [
             'production' => [
@@ -152,7 +152,7 @@ class RobotsTxtTest extends TestCase
     /**
      * Test that given multiple environments, it returns the correct path for the given environment
      */
-    public function testItShowsCorrectPathsForMultipleEnvironments()
+    public function testShowsCorrectPathsForMultipleEnvironments()
     {
         $paths = [
             'production' => [
