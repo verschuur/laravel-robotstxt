@@ -30,7 +30,7 @@
     },
     "scripts": {
         "test": "vendor/bin/phpunit --configuration phpunit.xml --colors=always",
-        "stan": "vendor/bin/phpstan analyse src tests"
+        "stan": "vendor/bin/phpstan analyse src tests --level 5"
     },
     "extra": {
         "laravel": {
