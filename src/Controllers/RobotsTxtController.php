@@ -53,7 +53,7 @@ class RobotsTxtController extends Controller
         }
 
         // output the entire robots.txt
-        return \Response::make($robots, 200, array('content-type' => 'text/plain'));
+        return \Response::make($robots, 200, ['content-type' => 'text/plain; charset=UTF-8']);
     }
 
     /**

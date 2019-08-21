@@ -193,7 +193,13 @@ class RobotsTxtTest extends TestCase
         ]);
         $response->assertDontSeeText('Disallow: /foobar' . PHP_EOL);
         $response->assertDontSeeText('Disallow:  ' . PHP_EOL);
-        $response->assertDontSeeText('Disallow: /' . PHP_EOL); 
+        $response->assertDontSeeText('Disallow: /' . PHP_EOL);
+    }
+
+    public function testOutputContentTypeIsTextPlainUtfEight()
+    {
+        $response = $this->get('/robots.txt');
+        $response->assertHeader('Content-Type', 'text/plain; charset=UTF-8');
     }
 
     protected function getPackageProviders($app)
