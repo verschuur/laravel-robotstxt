@@ -1,0 +1,4 @@
+parameters:
+	ignoreErrors:
+		- '#Call to static method get\(\) on an unknown class Route\.#'
+		- '#Call to an undefined static method Illuminate\\Http\\Response::make\(\)\.#' 
