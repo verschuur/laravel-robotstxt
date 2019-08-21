@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace Verschuur\Laravel\RobotsTxt\Controllers;
 
 use Illuminate\Routing\Controller;
+use Verschuur\Laravel\RobotsTxt\RobotsTxtManager as Manager;
 
 class RobotsTxtController extends Controller
 {
@@ -23,46 +24,11 @@ class RobotsTxtController extends Controller
      */
     public function index()
     {
-        /**
-         * Note that the config is originally loaded from this package's config file,
-         * ut a config file can be published to the Laravel config dir.
-         * If so, due to the nature of the config setup and Larvel's config merge,
-         * the original config gets completely overwritten.
-         */
-        $envs = config('robots-txt.paths');
-        $robots = '';
-        $env = config('app.env');
-
-        // if no env is set, or one of the set envs cannot be matched against the current env, use the default
-        if ($envs === null || !array_key_exists($env, $envs)) {
-            $robots = $this->defaultRobot();
-        } else {
-            // for each user agent, get the user agent name and the paths for the agent,
-            // appending them to the result string
-            $agents = $envs[$env];
-            foreach ($agents as $name => $paths) {
-                $robot = 'User-agent: ' . $name . PHP_EOL;
-
-                foreach ($paths as $path) {
-                    $robot .= 'Disallow: ' . $path . PHP_EOL;
-                }
-
-                // append this user agent and paths to the final output
-                $robots .= $robot . PHP_EOL;
-            }
-        }
-
+        $manager = new Manager();
+        $robots = $manager->build();
+        
         // output the entire robots.txt
         return response($robots, 200)
             ->header('Content-Type', 'text/plain; charset=UTF-8');
-    }
-
-    /**
-     * Default 'Disallow /' for every robot
-     * @return string user agent and disallow string
-     */
-    protected function defaultRobot()
-    {
-        return 'User-agent: *' . PHP_EOL . 'Disallow: /';
     }
 }
