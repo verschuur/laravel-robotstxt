@@ -46,13 +46,10 @@ class RobotsTxtManager
      */
     public function build(): array
     {
-        if (!$this->hasValidPathSettings()) {
-            return $this->defaultRobot();
-        } else {
-            $paths = $this->getPaths();
-            $sitemaps = $this->getSitemaps();    
-            return array_merge($paths, $sitemaps);        
-        }
+        $paths = $this->hasValidDefinitions($this->definedPaths) ? $this->getPaths() : $this->defaultRobot();
+        $sitemaps = $this->hasValidDefinitions($this->definedSitemaps) ? $this->getSitemaps() : [];
+
+        return array_merge($paths, $sitemaps);
     }
 
     /**
@@ -76,20 +73,20 @@ class RobotsTxtManager
      *
      * @return boolean
      */
-    protected function hasValidPathSettings(): bool
+    protected function hasValidDefinitions(?array $definitions): bool
     {
         // The'robots-txt.paths' config path return null.
-        if ($this->definedPaths === null) {
+        if ($definitions === null) {
             return false;
         }
 
         // The'robots-txt.paths' config path return an empty array.
-        if (empty($this->definedPaths)) {
+        if (empty($definitions)) {
             return false;
         }
 
         // The current environment cannot be matched against the defined environments.
-        if (!array_key_exists($this->currentEnvironment, $this->definedPaths)) {
+        if (!array_key_exists($this->currentEnvironment, $definitions)) {
             return false;
         }
         
@@ -134,10 +131,6 @@ class RobotsTxtManager
     {
         $entries = [];
 
-        if (!\array_key_exists($this->currentEnvironment, $this->definedSitemaps)) {
-            return $entries;
-        }
-        
         $sitemaps = $this->definedSitemaps[$this->currentEnvironment];
         foreach ($sitemaps as $sitemap) {
             $entries[] = 'Sitemap: ' . url($sitemap);
