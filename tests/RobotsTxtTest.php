@@ -82,8 +82,8 @@ class RobotsTxtTest extends TestCase
         $response = $this->get('/robots.txt');
 
         $response->assertSeeTextInOrder([
-            'User-agent: bot1' . PHP_EOL,
-            'User-agent: bot2' . PHP_EOL
+            'User-agent: bot1',
+            'User-agent: bot2'
         ]);
         $response->assertDontSeeText('Disallow:  ' . PHP_EOL);
         $response->assertDontSeeText('Disallow: /' . PHP_EOL);
@@ -148,7 +148,7 @@ class RobotsTxtTest extends TestCase
             'Disallow: /barfoo' . PHP_EOL,
             'User-agent: bot1' . PHP_EOL,
             'Disallow: /helloworld' . PHP_EOL,
-            'Disallow: /sorryicantdothatdave' . PHP_EOL
+            'Disallow: /sorryicantdothatdave'
         ]);
         $response->assertDontSeeText('Disallow:  ' . PHP_EOL);
         $response->assertDontSeeText('Disallow: /' . PHP_EOL);
@@ -180,7 +180,7 @@ class RobotsTxtTest extends TestCase
 
         $response->assertSeeTextInOrder([
             'User-agent: *' . PHP_EOL,
-            'Disallow: /foobar' . PHP_EOL
+            'Disallow: /foobar'
         ]);
         $response->assertDontSeeText('Disallow: /barfoo' . PHP_EOL);
         $response->assertDontSeeText('Disallow:  ' . PHP_EOL);
@@ -194,7 +194,7 @@ class RobotsTxtTest extends TestCase
 
         $response->assertSeeTextInOrder([
             'User-agent: *' . PHP_EOL,
-            'Disallow: /barfoo' . PHP_EOL
+            'Disallow: /barfoo'
         ]);
         $response->assertDontSeeText('Disallow: /foobar' . PHP_EOL);
         $response->assertDontSeeText('Disallow:  ' . PHP_EOL);
