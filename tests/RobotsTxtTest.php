@@ -225,6 +225,35 @@ class RobotsTxtTest extends TestCase
         ]);
     }
 
+    public function testAppHostGetUsedIfUseAppHostSettingIsEnabled()
+    {
+        $sitemaps = [
+            'sitemap-foobar.xml'
+        ];
+        $this->app['config']->set('app.env', 'production');
+        $this->app['config']->set('robots-txt.sitemaps.production', $sitemaps);
+        $this->app['config']->set('robots-txt.settings.sitemaps.use_app_host', true);
+
+        $response = $this->get('/robots.txt');
+
+        $response->assertSeeText('Sitemap: http://localhost/sitemap-foobar.xml');
+    }
+
+    public function testAppHostDoesNotGetUsedIfUseAppHostSettingIsDisabled()
+    {
+        $sitemaps = [
+            'sitemap-foobar.xml'
+        ];
+        $this->app['config']->set('app.env', 'production');
+        $this->app['config']->set('robots-txt.sitemaps.production', $sitemaps);
+        $this->app['config']->set('robots-txt.settings.sitemaps.use_app_host', false);
+
+        $response = $this->get('/robots.txt');
+
+        $response->assertSeeText('Sitemap: sitemap-foobar.xml');
+        $response->assertDontSeeText('Sitemap: http://localhost/sitemap-foobar.xml');
+    }
+
     protected function getPackageProviders($app)
     {
         return [\Verschuur\Laravel\RobotsTxt\Providers\RobotsTxtProvider::class];
