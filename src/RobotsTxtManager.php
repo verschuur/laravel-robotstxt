@@ -134,6 +134,10 @@ class RobotsTxtManager
     {
         $entries = [];
 
+        if (!\array_key_exists($this->currentEnvironment, $this->definedSitemaps)) {
+            return $entries;
+        }
+        
         $sitemaps = $this->definedSitemaps[$this->currentEnvironment];
         foreach ($sitemaps as $sitemap) {
             $entries[] = 'Sitemap: ' . url($sitemap);
