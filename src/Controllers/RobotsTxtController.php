@@ -16,7 +16,7 @@ class RobotsTxtController extends Controller
     public function index()
     {
         $manager = new Manager();
-        $robots = $manager->build();
+        $robots = implode(PHP_EOL, $manager->build());
         
         // output the entire robots.txt
         return response($robots, 200)
