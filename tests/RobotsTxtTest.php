@@ -8,6 +8,11 @@ use Orchestra\Testbench\TestCase;
 
 class RobotsTxtTest extends TestCase
 {
+    protected function setUp(): void
+    {
+        parent::setUp();
+        $this->withoutExceptionHandling();
+    }
     /**
      * Test that given an environment of 'production', it returns the default allow all
      */
