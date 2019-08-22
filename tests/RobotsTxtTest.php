@@ -207,6 +207,24 @@ class RobotsTxtTest extends TestCase
         $response->assertHeader('Content-Type', 'text/plain; charset=UTF-8');
     }
 
+    public function testShowsSitemaps()
+    {
+        $sitemaps = [
+            'sitemap-foo.xml',
+            'sitemap-bar.xml',
+        ];
+        $this->app['config']->set('app.env', 'production');
+        $this->app['config']->set('robots-txt.sitemaps.production', $sitemaps);
+
+        $response = $this->get('/robots.txt');
+        $response->assertSeeTextInOrder([
+            'User-agent: *' . PHP_EOL,
+            'Disallow: ' . PHP_EOL,
+            'Sitemap: http://localhost/sitemap-foo.xml' . PHP_EOL,
+            'Sitemap: http://localhost/sitemap-bar.xml'
+        ]);
+    }
+
     protected function getPackageProviders($app)
     {
         return [\Verschuur\Laravel\RobotsTxt\Providers\RobotsTxtProvider::class];

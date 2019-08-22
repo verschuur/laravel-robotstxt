@@ -6,5 +6,10 @@ return [
                 '', // production env always allows all
             ]
         ]
+    ],
+    'sitemaps' => [
+        'production' => [
+            
+        ]
     ]
 ];

@@ -6,11 +6,18 @@ namespace Verschuur\Laravel\RobotsTxt;
 class RobotsTxtManager
 {
     /**
-     * The various paths defined in the package/app config.
+     * The paths defined in the package/app config.
      *
      * @var array
      */
     private $definedPaths = [];
+
+    /**
+     * The sitemaps defined in the package/app config.
+     *
+     * @var array
+     */
+    private $definedSitemaps = [];
 
     /**
      * The current application environment
@@ -28,6 +35,7 @@ class RobotsTxtManager
          * the original config gets completely overwritten.
          */
         $this->definedPaths = config('robots-txt.paths');
+        $this->definedSitemaps = config('robots-txt.sitemaps');
         $this->currentEnvironment = config('app.env');
     }
 
@@ -42,13 +50,9 @@ class RobotsTxtManager
             return $this->defaultRobot();
         } else {
             $paths = $this->getPaths();
-
-            $robots = array_map(function ($path) {
-                return $path . PHP_EOL;
-            }, $paths);
+            $sitemaps = $this->getSitemaps();    
+            return array_merge($paths, $sitemaps);        
         }
-
-        return $paths;
     }
 
     /**
@@ -95,7 +99,8 @@ class RobotsTxtManager
     /**
      * Assemble all the defined paths from the config.
      *
-     * Loop through all the defined paths, creating an array which matches the order of the entries in the txt file
+     * Loop through all the defined paths,
+     * creating an array which matches the order of the path entries in the txt file
      *
      * @return array
      */
@@ -112,6 +117,26 @@ class RobotsTxtManager
             foreach ($paths as $path) {
                 $entries[] = 'Disallow: ' . $path ;
             }
+        }
+
+        return $entries;
+    }
+
+     /**
+     * Assemble all the defined sitemaps from the config.
+     *
+     * Loop through all the defined sitemaps,
+     * creating an array which matches the order of the sitemap entries in the txt file
+     *
+     * @return array
+     */
+    protected function getSitemaps(): array
+    {
+        $entries = [];
+
+        $sitemaps = $this->definedSitemaps[$this->currentEnvironment];
+        foreach ($sitemaps as $sitemap) {
+            $entries[] = 'Sitemap: ' . url($sitemap);
         }
 
         return $entries;
