@@ -133,7 +133,7 @@ class RobotsTxtManager
 
         $sitemaps = $this->definedSitemaps[$this->currentEnvironment];
         foreach ($sitemaps as $sitemap) {
-            $entries[] = 'Sitemap: ' . $sitemap;
+            $entries[] = 'Sitemap: ' . url($sitemap);
         }
         
         return $entries;
