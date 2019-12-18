@@ -129,15 +129,10 @@ class RobotsTxtManager
      */
     protected function getSitemaps(): array
     {
-        // If this setting is enabled, the sitemaps will automatically be prepended with the app's defined host.
-        // If not, it will simply take the entry verbatim.
-        $useAbsoluteUrl = config('robots-txt.settings.sitemaps.use_app_host');
-
         $entries = [];
 
         $sitemaps = $this->definedSitemaps[$this->currentEnvironment];
         foreach ($sitemaps as $sitemap) {
-            $sitemap = ($useAbsoluteUrl) ? url($sitemap) : $sitemap;
             $entries[] = 'Sitemap: ' . $sitemap;
         }
         
