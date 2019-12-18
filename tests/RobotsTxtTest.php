@@ -16,7 +16,7 @@ class RobotsTxtTest extends TestCase
     /**
      * Test that given an environment of 'production', it returns the default allow all
      */
-    public function testHasDefaultResponseForProductionEnv()
+    public function test_has_default_response_for_production_env()
     {
         $this->app['config']->set('app.env', 'production');
 
@@ -32,7 +32,7 @@ class RobotsTxtTest extends TestCase
     /**
      * Test that given any other environment than 'production', it returns the default allow none
      */
-    public function testHasDefaultResponseForNonProductionEnv()
+    public function test_has_default_response_for_non_production_env()
     {
         $this->app['config']->set('app.env', 'staging');
 
@@ -45,7 +45,7 @@ class RobotsTxtTest extends TestCase
     /**
      * Test that custom paths will overwrite the defaults
      */
-    public function testShowsCustomSetPaths()
+    public function test_shows_custom_set_paths()
     {
         $paths = [
             'production' => [
@@ -67,7 +67,7 @@ class RobotsTxtTest extends TestCase
     /**
      * Test that given multiple user agents, it will return multiple user agent entries
      */
-    public function testShowsMultipleUserAgents()
+    public function test_shows_multiple_user_agents()
     {
         $paths = [
             'production' => [
@@ -93,7 +93,7 @@ class RobotsTxtTest extends TestCase
      * Test that given multiple paths for a user agent,
      * it will return multiple path entries for a single user agent entry
      */
-    public function testShowsMultiplePathsPerAgent()
+    public function test_shows_multiple_paths_per_agent()
     {
         $paths = [
             'production' => [
@@ -122,7 +122,7 @@ class RobotsTxtTest extends TestCase
      * Test that given multiple paths for multiple user agents,
      * it will return multiple path entries for multiple user agent entries
      */
-    public function testShowsMultiplePathsForMultipleAgents()
+    public function test_shows_multiple_paths_for_multiple_agents()
     {
         $paths = [
             'production' => [
@@ -157,7 +157,7 @@ class RobotsTxtTest extends TestCase
     /**
      * Test that given multiple environments, it returns the correct path for the given environment
      */
-    public function testShowsCorrectPathsForMultipleEnvironments()
+    public function test_shows_correct_paths_for_multiple_environments()
     {
         $paths = [
             'production' => [
@@ -201,13 +201,13 @@ class RobotsTxtTest extends TestCase
         $response->assertDontSeeText('Disallow: /' . PHP_EOL);
     }
 
-    public function testOutputContentTypeIsTextPlainUtfEight()
+    public function test_output_content_type_is_text_plain_utf_eight()
     {
         $response = $this->get('/robots.txt');
         $response->assertHeader('Content-Type', 'text/plain; charset=UTF-8');
     }
 
-    public function testShowsSitemaps()
+    public function test_shows_sitemaps()
     {
         $sitemaps = [
             'sitemap-foo.xml',
