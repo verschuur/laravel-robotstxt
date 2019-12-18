@@ -88,3 +88,7 @@ This package is compatible with Laravel 5.8
 ## Testing
 
 PHPUnit test cases are provided in `/tests`. Run the tests through `composer run test` or `vendor/bin/phpunit --configuration phpunit.xml`.
+
+## Link
+
+<https://developers.google.com/search/reference/robots_txt>

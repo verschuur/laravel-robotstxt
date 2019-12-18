@@ -10,14 +10,14 @@ class RobotsTxtManager
      *
      * @var array
      */
-    private $definedPaths = [];
+    private $definedPaths = null;
 
     /**
      * The sitemaps defined in the package/app config.
      *
      * @var array
      */
-    private $definedSitemaps = [];
+    private $definedSitemaps = null;
 
     /**
      * The current application environment
@@ -34,9 +34,9 @@ class RobotsTxtManager
          * If so, due to the nature of the config setup and Larvel's config merge,
          * the original config gets completely overwritten.
          */
-        $this->definedPaths = config('robots-txt.paths');
-        $this->definedSitemaps = config('robots-txt.sitemaps');
         $this->currentEnvironment = config('app.env');
+        $this->definedPaths = config('robots-txt.environments.'.$this->currentEnvironment.'.paths');
+        $this->definedSitemaps = config('robots-txt.environments.'.$this->currentEnvironment.'.sitemaps');
     }
 
     /**
@@ -46,8 +46,8 @@ class RobotsTxtManager
      */
     public function build(): array
     {
-        $paths = $this->hasValidDefinitions($this->definedPaths) ? $this->getPaths() : $this->defaultRobot();
-        $sitemaps = $this->hasValidDefinitions($this->definedSitemaps) ? $this->getSitemaps() : [];
+        $paths = ($this->definedPaths) ? $this->getPaths() : $this->defaultRobot();
+        $sitemaps = ($this->definedSitemaps) ? $this->getSitemaps() : [];
 
         return array_merge($paths, $sitemaps);
     }
@@ -60,37 +60,6 @@ class RobotsTxtManager
     protected function defaultRobot(): array
     {
         return ['User-agent: *', 'Disallow: /'];
-    }
-
-    /**
-     * Validates the set environment paths and the current environment
-     *
-     * If:
-     * - The defined environments are null (missing from config)
-     * - One or more enviroments are set, but have no pathss
-     * - The current environment cannot be matched against the defined environments
-     * then return false;
-     *
-     * @return boolean
-     */
-    protected function hasValidDefinitions(?array $definitions): bool
-    {
-        // The'robots-txt.paths' config path return null.
-        if ($definitions === null) {
-            return false;
-        }
-
-        // The'robots-txt.paths' config path return an empty array.
-        if (empty($definitions)) {
-            return false;
-        }
-
-        // The current environment cannot be matched against the defined environments.
-        if (!array_key_exists($this->currentEnvironment, $definitions)) {
-            return false;
-        }
-        
-        return true;
     }
 
     /**
@@ -107,12 +76,19 @@ class RobotsTxtManager
         // adding them to the array
         $entries = [];
 
-        $agents = $this->definedPaths[$this->currentEnvironment];
-        foreach ($agents as $name => $paths) {
-            $entries[] = 'User-agent: ' . $name;
+        foreach ($this->definedPaths as $agent => $paths) {
+            $entries[] = 'User-agent: ' . $agent;
 
-            foreach ($paths as $path) {
-                $entries[] = 'Disallow: ' . $path ;
+            if (array_key_exists('disallow', $paths)) {
+                foreach ($paths['disallow'] as $path) {
+                    $entries[] = 'Disallow: ' . $path ;
+                }
+            }
+
+            if (array_key_exists('allow', $paths)) {
+                foreach ($paths['allow'] as $path) {
+                    $entries[] = 'Allow: ' . $path ;
+                }
             }
         }
 
@@ -131,8 +107,7 @@ class RobotsTxtManager
     {
         $entries = [];
 
-        $sitemaps = $this->definedSitemaps[$this->currentEnvironment];
-        foreach ($sitemaps as $sitemap) {
+        foreach ($this->definedSitemaps as $sitemap) {
             $entries[] = 'Sitemap: ' . url($sitemap);
         }
         

@@ -1,15 +1,19 @@
 <?php
 return [
     'settings' => [],
+    'environments' => [
         'production' => [
-            '*' => [
-                '', // production env always allows all
+            'paths' => [
+                '*' => [
+                    'disallow' => [
+                        ''
+                    ],
+                    'allow' => []
+                ],
+            ],
+            'sitemaps' => [
+                'sitemap.xml'
             ]
-        ]
-    ],
-    'sitemaps' => [
-        'production' => [
-            
         ]
     ]
 ];

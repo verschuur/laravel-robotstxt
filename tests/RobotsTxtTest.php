@@ -48,19 +48,24 @@ class RobotsTxtTest extends TestCase
     public function test_shows_custom_set_paths()
     {
         $paths = [
-            'production' => [
-                '*' => [
+            '*' => [
+                'disallow' => [
                     '/foobar',
+                ],
+                'allow' => [
+                    '/fizzbuzz'
                 ]
             ]
         ];
 
-        $this->app['config']->set('app.env', 'production');
-        $this->app['config']->set('robots-txt.paths', $paths);
+        $this->setConfig($paths);
 
         $response = $this->get('/robots.txt');
 
-        $response->assertSeeText('User-agent: *'. PHP_EOL . 'Disallow: /foobar');
+        $response->assertSeeTextInOrder([
+            'User-agent: *'. PHP_EOL,
+            'Disallow: /foobar' . PHP_EOL,
+            'Allow: /fizzbuzz']);
         $response->assertDontSeeText('Disallow:  ' . PHP_EOL);
     }
 
@@ -69,15 +74,15 @@ class RobotsTxtTest extends TestCase
      */
     public function test_shows_multiple_user_agents()
     {
-        $paths = [
-            'production' => [
-                'bot1' => [],
-                'bot2' => []
-            ]
+        $bots = [
+            'bot1' => [],
+            'bot2' => []
         ];
 
+        $this->setConfig($bots);
+
         $this->app['config']->set('app.env', 'production');
-        $this->app['config']->set('robots-txt.paths', $paths);
+        $this->app['config']->set('robots-txt.environments.production.paths', $bots);
 
         $response = $this->get('/robots.txt');
 
@@ -96,23 +101,28 @@ class RobotsTxtTest extends TestCase
     public function test_shows_multiple_paths_per_agent()
     {
         $paths = [
-            'production' => [
-                '*' => [
+            'bender' => [
+                'disallow' => [
                     '/foobar',
-                    '/barfoo'
+                    '/barfoo',
                 ],
+                'allow' => [
+                    '/fizzbuzz',
+                    '/buzzfizz'
+                ]
             ]
         ];
 
-        $this->app['config']->set('app.env', 'production');
-        $this->app['config']->set('robots-txt.paths', $paths);
+        $this->setConfig($paths);
 
         $response = $this->get('/robots.txt');
 
         $response->assertSeeTextInOrder([
-            'User-agent: *' . PHP_EOL ,
+            'User-agent: bender' . PHP_EOL ,
             'Disallow: /foobar' . PHP_EOL,
-            'Disallow: /barfoo'
+            'Disallow: /barfoo' . PHP_EOL,
+            'Allow: /fizzbuzz' . PHP_EOL,
+            'Allow: /buzzfizz' . PHP_EOL,
         ]);
         $response->assertDontSeeText('Disallow:  ' . PHP_EOL);
         $response->assertDontSeeText('Disallow: /' . PHP_EOL);
@@ -125,30 +135,44 @@ class RobotsTxtTest extends TestCase
     public function test_shows_multiple_paths_for_multiple_agents()
     {
         $paths = [
-            'production' => [
-                '*' => [
+            'bender' => [
+                'disallow' => [
                     '/foobar',
-                    '/barfoo'
+                    '/barfoo',
                 ],
-                'bot1' => [
-                    '/helloworld',
-                    '/sorryicantdothatdave'
+                'allow' => [
+                    '/fizzbuzz',
+                    '/buzzfizz'
+                ]
+            ],
+            'flexo' => [
+                'disallow' => [
+                    '/fizzbuzz',
+                    '/buzzfizz'
+                ],
+                'allow' => [
+                    '/foobar',
+                    '/barfoo',
                 ]
             ]
         ];
 
-        $this->app['config']->set('app.env', 'production');
-        $this->app['config']->set('robots-txt.paths', $paths);
+        $this->setConfig($paths);
 
         $response = $this->get('/robots.txt');
 
         $response->assertSeeTextInOrder([
-            'User-agent: *' . PHP_EOL,
+            'User-agent: bender' . PHP_EOL ,
             'Disallow: /foobar' . PHP_EOL,
             'Disallow: /barfoo' . PHP_EOL,
-            'User-agent: bot1' . PHP_EOL,
-            'Disallow: /helloworld' . PHP_EOL,
-            'Disallow: /sorryicantdothatdave'
+            'Allow: /fizzbuzz' . PHP_EOL,
+            'Allow: /buzzfizz' . PHP_EOL,
+
+            'User-agent: flexo' . PHP_EOL ,
+            'Disallow: /fizzbuzz' . PHP_EOL,
+            'Disallow: /buzzfizz' . PHP_EOL,
+            'Allow: /foobar' . PHP_EOL,
+            'Allow: /barfoo' . PHP_EOL,
         ]);
         $response->assertDontSeeText('Disallow:  ' . PHP_EOL);
         $response->assertDontSeeText('Disallow: /' . PHP_EOL);
@@ -159,42 +183,51 @@ class RobotsTxtTest extends TestCase
      */
     public function test_shows_correct_paths_for_multiple_environments()
     {
-        $paths = [
+        $environments = [
             'production' => [
-                '*' => [
-                    '/foobar',
+                'paths' => [
+                    '*' => [
+                        'disallow' => [
+                            '/foobar'
+                        ]
+                    ],
                 ]
             ],
             'staging' => [
-                '*' => [
-                    '/barfoo'
+                'paths' => [
+                    '*' => [
+                        'allow' => [
+                            '/barfoo'
+                        ]
+                    ],
                 ]
             ]
         ];
 
+        
+        $this->app['config']->set('robots-txt.environments',  $environments);
+
         // Test env #1
         $this->app['config']->set('app.env', 'production');
-        $this->app['config']->set('robots-txt.paths', $paths);
 
         $response = $this->get('/robots.txt');
 
         $response->assertSeeTextInOrder([
             'User-agent: *' . PHP_EOL,
-            'Disallow: /foobar'
+            'Disallow: /foobar',
         ]);
-        $response->assertDontSeeText('Disallow: /barfoo' . PHP_EOL);
+        $response->assertDontSeeText('Allow: /barfoo' . PHP_EOL);
         $response->assertDontSeeText('Disallow:  ' . PHP_EOL);
         $response->assertDontSeeText('Disallow: /' . PHP_EOL);
 
         // Test env #2
         $this->app['config']->set('app.env', 'staging');
-        $this->app['config']->set('robots-txt.paths', $paths);
 
         $response = $this->get('/robots.txt');
 
         $response->assertSeeTextInOrder([
             'User-agent: *' . PHP_EOL,
-            'Disallow: /barfoo'
+            'Allow: /barfoo'
         ]);
         $response->assertDontSeeText('Disallow: /foobar' . PHP_EOL);
         $response->assertDontSeeText('Disallow:  ' . PHP_EOL);
@@ -213,8 +246,8 @@ class RobotsTxtTest extends TestCase
             'sitemap-foo.xml',
             'sitemap-bar.xml',
         ];
-        $this->app['config']->set('app.env', 'production');
-        $this->app['config']->set('robots-txt.sitemaps.production', $sitemaps);
+
+        $this->setConfig($sitemaps, 'sitemaps');
 
         $response = $this->get('/robots.txt');
         $response->assertSeeTextInOrder([
@@ -223,6 +256,12 @@ class RobotsTxtTest extends TestCase
             'Sitemap: http://localhost/sitemap-foo.xml' . PHP_EOL,
             'Sitemap: http://localhost/sitemap-bar.xml'
         ]);
+    }
+
+    protected function setConfig(array $data, string $section = 'paths', string $env = 'production')
+    {
+        $this->app['config']->set('app.env', $env);
+        $this->app['config']->set('robots-txt.environments.production.' . $section, $data);
     }
 
     protected function getPackageProviders($app)
