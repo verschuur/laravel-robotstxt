@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<ruleset name="Testing Suites rulesets">
+    <description>Ignore required CamelCaps</description>
+        <rule ref="Generic.NamingConventions.CamelCapsFunctionName">
+        <exclude-pattern>*/tests/*</exclude-pattern>
+    </rule>
+</ruleset>
