@@ -79,22 +79,33 @@ class RobotsTxtManager
         foreach ($this->definedPaths as $agent => $paths) {
             $entries[] = 'User-agent: ' . $agent;
 
-            if (array_key_exists('disallow', $paths)) {
-                foreach ($paths['disallow'] as $path) {
-                    $entries[] = 'Disallow: ' . $path ;
-                }
-            }
-
-            if (array_key_exists('allow', $paths)) {
-                foreach ($paths['allow'] as $path) {
-                    $entries[] = 'Allow: ' . $path ;
-                }
-            }
+            $entries = \array_merge($entries, $this->parsePaths('disallow', $paths));
+            $entries = \array_merge($entries, $this->parsePaths('allow', $paths));
         }
 
         return $entries;
     }
 
+    /**
+     * Parse defined paths into sitemap entries
+     *
+     * @param string $directive The directive name (disallow/allow)
+     * @param array $paths Array of all the paths
+     * @return array Array containing the sitemap entries
+     */
+    protected function parsePaths(string $directive, array $paths): array
+    {
+        $entries = [];
+
+        if (array_key_exists($directive, $paths)) {
+            foreach ($paths[$directive] as $path) {
+                $entries[] = sprintf('%s: %s', ucfirst($directive), $path);
+            }
+        }
+
+        return $entries;
+    }
+    
      /**
      * Assemble all the defined sitemaps from the config.
      *
