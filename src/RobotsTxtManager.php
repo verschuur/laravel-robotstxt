@@ -119,6 +119,8 @@ class RobotsTxtManager
         $entries = [];
 
         foreach ($this->definedSitemaps as $sitemap) {
+            // Sitemaps should always use a absolute url.
+            // Combinding the sitemap paths with Laravel's url() function will do nicely.
             $entries[] = 'Sitemap: ' . url($sitemap);
         }
         
