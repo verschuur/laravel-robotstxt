@@ -1,94 +1,219 @@
-# Dynamic robots.txt ServiceProvider for Laravel
+![Run PHPUnit test passing](https://github.com/verschuur/laravel-robotstxt/workflows/Run%20PHPUnit%20tests/badge.svg "Run PHPUnit test passing")
 
-## Installation
+<h1>Dynamic robots.txt ServiceProvider for Laravel 🤖</h1>
 
-    composer require verschuur/laravel-robotstxt
+- [Installation](#installation)
+  - [Composer](#composer)
+  - [Manual](#manual)
+  - [Service provider registration](#service-provider-registration)
+- [Usage](#usage)
+  - [Basic usage](#basic-usage)
+  - [Custom settings](#custom-settings)
+  - [Examples](#examples)
+    - [Allow directive](#allow-directive)
+  - [Sitemaps](#sitemaps)
+    - [The standard production configuration](#the-standard-production-configuration)
+    - [Adding multiple sitemaps](#adding-multiple-sitemaps)
+- [Compatiblility](#compatiblility)
+- [Testing](#testing)
+- [robots.txt reference](#robotstxt-reference)
 
-or add the following to your `composer.json`
+# Installation
 
-    {
-        "require": {
-            "verschuur/laravel-robotstxt": "^1.0"
-        }
+## Composer
+
+```bash
+composer require verschuur/laravel-robotstxt
+```
+
+## Manual
+
+Add the following to your `composer.json` and then run `composer install`.
+
+```php
+{
+    "require": {
+        "verschuur/laravel-robotstxt": "^2.0"
     }
+}
+```
 
-After updating Composer, add the ServiceProvider to the providers array in `config/app.php`.
+## Service provider registration
 
-     Verschuur\Laravel\RobotsTxt\Providers\RobotsTxtProvider::class
+This package supports Laravel's service provider autodiscovery so that's it. If you wish to register the package manually, add the ServiceProvider to the providers array in `config/app.php`.
 
-## Usage
+```php
+Verschuur\Laravel\RobotsTxt\Providers\RobotsTxtProvider::class
+```
 
-### Basic usage
+# Usage
 
-This package adds a route `/robots.txt` to your application. __Remember to remove the physical `robots.txt` file from your `/public` dir or else it will take precedence over Laravel's route and this package will not work.__
+## Basic usage
+
+This package adds a `/robots.txt` route to your application. Remember to remove the physical `robots.txt` file from your `/public` dir or else it will take precedence over Laravel's route and this package will not work.
 
 By default, the `production` environment will show
 
-    User-agent: *
-    Disallow:
+```txt
+User-agent: *
+Disallow:
+```
 
 while every other environment will show
 
-    User-agent: *
-    Disallow: /
+```txt
+User-agent: *
+Disallow: /
+```
 
-This will allow a basic install to allow all robots on a production install, while disallowing robots on every other environment (such as staging, acceptation etc).
+This will allow the default install to allow all robots on a production environment, while disallowing robots on every other environment. If you do not define an environment in this file, the default will always be to disallow all bots for all paths.
 
-### Custom settings
+## Custom settings
 
-If you need custom settings, publish the configuration file
+If you need custom sitemap entries, publish the configuration file
 
-    php artisan vendor:publish --provider="Verschuur\Laravel\RobotsTxt\RobotsTxtProvider"
+```bash
+php artisan vendor:publish --provider="Verschuur\Laravel\RobotsTxt\RobotsTxtProvider"
+```
 
-This will copy `robots-txt.php` to your app's `config` folder, allowing you fine-grained control over which paths to disallow for which environment and robot. In this file you will find the following array structure
+This will copy the `robots-txt.php` config file to your app's `config` folder. In this file you will find the following array structure
 
+```php
+'environments' => [
+    '{environment name}' => [
+        'paths' => [
+            '{robot name}' => [
+                'disallow' => [
+                    ''
+                ],
+                'allow' => []
+            ],
+        ]
+    ]
+]
+```
+
+In which:
+
+- `{environment name}`: the enviroment for which to define the paths.
+- `{robot name}`: the robot for which to define the paths.
+- `disallow`: all entries which will be used by the `disallow` directive.
+- `allow`: all entries which will be used by the `allow` directive.
+
+By default, the environment name is set to `production` with a robot name of `*` and a disallow entry consisting of an empty string. This will allow all bots to access all paths on the production environment.
+
+## Examples
+
+For brevity, the `environment` array key will be disregarded in these examples.
+
+Allow all paths for all robots on production, and disallow all paths for every robot in staging.
+
+```php
+'production' => [
     'paths' => [
-        'production' => [
-            '*' => [
+        '*' => [
+            'disallow' => [
                 ''
             ]
         ]
     ]
-
-### Examples
-
-Allow all paths for all robots on production, and disallow everything for every robot in staging
-
-    'paths' => [
-        'production' => [
-            '*' => [
-                ''
-            ]
-        ],
-        'staging' => [
-            '*' => [
+],
+'staging' => [
+    'paths' [
+        '*' => [
+            'disallow' => [
                 '/'
             ]
         ]
     ]
+]
+```
 
-Allow all paths for all robot __bender__ on production, but disallow `/admin` and `/images` on production for robot __flexo__
+Allow all paths for all robot _bender_ on production, but disallow `/admin` and `/images` on production for robot _flexo_
 
+```php
+'production' => [
     'paths' => [
-        'production' => [
-            'bender' => [
+        'bender' => [
+            'disallow' => [
                 ''
-            ],
-            'flexo' => [
+            ]
+        ],
+        'flexo' => [
+            'disallow' => [
                 '/admin',
                 '/images'
             ]
-        ],
+        ]
     ]
+],
+```
 
-## Compatiblility
+### Allow directive
 
-This package is compatible with Laravel 5.8
+Besides the more standard `disallow` directive, the `allow` directive is also supported.
 
-## Testing
+Allow a path, but disallow sub paths:
+
+```php
+'production' => [
+    'paths' => [
+        '*' => [
+            'disallow' => [
+                '/foo/bar'
+            ],
+            'allow' => [
+                '/foo'
+            ]
+        ]
+    ]
+],
+```
+
+When the file is rendered, the `disallow` directives will always be placed before the `allow` directives.
+
+If you don't need one or the other directive, and you wish to keep the configuration file clean, you can simply remove the entire key from the entire array.
+
+## Sitemaps
+
+This package also allows to add sitemaps to the robots file. By default, the production environment will add a sitemap.xml entry to the file. You can remove this default entry from the `sitemaps` array if you don't need it.
+
+Because sitemaps always need to an absolute url, they are automatically wrapped using [Laravel's url() helper function](https://laravel.com/docs/6.x/helpers#method-url). The sitemap entries in the config file should be relative to the webroot.
+
+### The standard production configuration
+
+```php
+'environments' => [
+    'production' => [
+        'sitemaps' => [
+            'sitemap.xml'
+        ]
+    ]
+]
+```
+
+### Adding multiple sitemaps
+
+```php
+'environments' => [
+    'production' => [
+        'sitemaps' => [
+            'sitemap-articles.xml',
+            'sitemap-products.xml',
+            'sitemap-etcetera.xml'
+        ]
+    ]
+]
+```
+
+# Compatiblility
+
+This package is compatible with Laravel 5.6 and higher, and all the 6.* versions.
+
+# Testing
 
 PHPUnit test cases are provided in `/tests`. Run the tests through `composer run test` or `vendor/bin/phpunit --configuration phpunit.xml`.
 
-## Link
+# robots.txt reference
 
 <https://developers.google.com/search/reference/robots_txt>
