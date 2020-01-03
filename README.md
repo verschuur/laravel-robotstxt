@@ -1,4 +1,4 @@
-![Run PHPUnit test passing](https://github.com/verschuur/laravel-robotstxt/workflows/Run%20PHPUnit%20tests/badge.svg "Run PHPUnit test passing")
+![Run PHPUnit test passing](https://github.com/verschuur/laravel-robotstxt/workflows/Run%20PHPUnit%20tests/badge.svg "Run PHPUnit test passing") ![Code Climate issues](https://img.shields.io/codeclimate/issues/verschuur/laravel-robotstxt.svg?style=flat-square) ![Code Climate maintainability](https://img.shields.io/codeclimate/maintainability/verschuur/laravel-robotstxt.svg?style=flat-square) ![Scrutinizer](https://img.shields.io/scrutinizer/g/verschuur/laravel-robotstxt.svg?style=flat-square)
 
 <h1>Dynamic robots.txt ServiceProvider for Laravel 🤖</h1>
 
