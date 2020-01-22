@@ -119,7 +119,7 @@ Allow all paths for all robots on production, and disallow all paths for every r
     ]
 ],
 'staging' => [
-    'paths' [
+    'paths' => [
         '*' => [
             'disallow' => [
                 '/'
