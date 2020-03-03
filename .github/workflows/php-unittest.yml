@@ -18,7 +18,7 @@ jobs:
               include:
                   - laravel: 6.*
                     testbench: 4.*
-                    phpunit: 9.*
+                    phpunit: 8.*
                   - laravel: 5.8.*
                     testbench: 3.8.*
                     phpunit: 8.*
