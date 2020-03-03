@@ -1,20 +1,57 @@
-name: Run PHPUnit tests
+name: Run tests
 
-on: [push]
+on:
+  push:
+  schedule:
+      - cron: '0 0 * * *'
 
 jobs:
-  build:
+  jobs:
+    php-tests:
+        runs-on: ${{ matrix.os }}
 
-    runs-on: ubuntu-latest
+        strategy:
+            matrix:
+                php: [7.4, 7.3, 7.2]
+                laravel: [6.*, 5.8.*, 5.7.*, 5.6.*, 5.5.*]
+                dependency-version: [prefer-lowest, prefer-stable]
+                os: [ubuntu-latest, windows-latest]
+                include:
+                    - laravel: 6.*
+                      testbench: 4.*
+                    - laravel: 5.8.*
+                      testbench: 3.8.*
+                    - laravel: 5.7.*
+                      testbench: 3.7.*
+                    - laravel: 5.6.*
+                      testbench: 3.6.*
+                    - laravel: 5.5.*
+                      testbench: 3.5.*
+                exclude:
+                    - laravel: 5.7.*
+                      php: 7.4
+                    - laravel: 5.6.*
+                      php: 7.4
+                    - laravel: 5.5.*
+                      php: 7.4
 
-    steps:
-    - uses: actions/checkout@v1
+        name: P${{ matrix.php }} - L${{ matrix.laravel }} - ${{ matrix.dependency-version }} - ${{ matrix.os }}
 
-    - name: Validate composer.json and composer.lock
-      run: composer validate
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v1
 
-    - name: Install dependencies
-      run: composer install --prefer-dist --no-progress --no-suggest
+            - name: Setup PHP
+              uses: shivammathur/setup-php@v1
+              with:
+                  php-version: ${{ matrix.php }}
+                  extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo, sqlite, pdo_sqlite, bcmath, soap, intl, gd, exif, iconv, imagick
+                  coverage: none
 
-    - name: Run test suite
-      run: composer run-script test
+            - name: Install dependencies
+              run: |
+                  composer require "laravel/framework:${{ matrix.laravel }}" "orchestra/testbench:${{ matrix.testbench }}" --no-interaction --no-update
+                  composer update --${{ matrix.dependency-version }} --prefer-dist --no-interaction --no-suggest
+
+            - name: Execute tests
+              run: vendor/bin/phpunit
