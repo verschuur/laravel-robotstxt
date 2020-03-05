@@ -1,4 +1,4 @@
-![Run PHPUnit test passing](https://github.com/verschuur/laravel-robotstxt/workflows/Run%20PHPUnit%20tests/badge.svg "Run PHPUnit test passing") ![Code Climate issues](https://img.shields.io/codeclimate/issues/verschuur/laravel-robotstxt.svg?style=flat-square) ![Code Climate maintainability](https://img.shields.io/codeclimate/maintainability/verschuur/laravel-robotstxt.svg?style=flat-square) ![Scrutinizer](https://img.shields.io/scrutinizer/g/verschuur/laravel-robotstxt.svg?style=flat-square)
+![Run tests](https://github.com/verschuur/laravel-robotstxt/workflows/Run%20tests/badge.svg?branch=master) ![Code Climate issues](https://img.shields.io/codeclimate/issues/verschuur/laravel-robotstxt.svg?style=flat-square) ![Code Climate maintainability](https://img.shields.io/codeclimate/maintainability/verschuur/laravel-robotstxt.svg?style=flat-square) ![Scrutinizer](https://img.shields.io/scrutinizer/g/verschuur/laravel-robotstxt.svg?style=flat-square)
 
 <h1>Dynamic robots.txt ServiceProvider for Laravel 🤖</h1>
 
@@ -33,7 +33,7 @@ Add the following to your `composer.json` and then run `composer install`.
 ```php
 {
     "require": {
-        "verschuur/laravel-robotstxt": "^2.0"
+        "verschuur/laravel-robotstxt": "^3.0"
     }
 }
 ```
@@ -119,7 +119,7 @@ Allow all paths for all robots on production, and disallow all paths for every r
     ]
 ],
 'staging' => [
-    'paths' [
+    'paths' => [
         '*' => [
             'disallow' => [
                 '/'
@@ -178,7 +178,7 @@ If you don't need one or the other directive, and you wish to keep the configura
 
 This package also allows to add sitemaps to the robots file. By default, the production environment will add a sitemap.xml entry to the file. You can remove this default entry from the `sitemaps` array if you don't need it.
 
-Because sitemaps always need to an absolute url, they are automatically wrapped using [Laravel's url() helper function](https://laravel.com/docs/6.x/helpers#method-url). The sitemap entries in the config file should be relative to the webroot.
+Because sitemaps always need to an absolute url, they are automatically wrapped using [Laravel's url() helper function](https://laravel.com/docs/7.x/helpers#method-url). The sitemap entries in the config file should be relative to the webroot.
 
 ### The standard production configuration
 
@@ -208,12 +208,14 @@ Because sitemaps always need to an absolute url, they are automatically wrapped 
 
 # Compatiblility
 
-This package is compatible with Laravel 5.6 and higher, and all the 6.* versions.
+This package is compatible with Laravel 5.6 and up, 6 and 7. For a complete overview of supported Laravel and PHP versions, please refer to the ['Run test' workflow](https://github.com/verschuur/laravel-robotstxt/actions).
 
 # Testing
 
 PHPUnit test cases are provided in `/tests`. Run the tests through `composer run test` or `vendor/bin/phpunit --configuration phpunit.xml`.
 
 # robots.txt reference
+
+The following reference was while creating this package:
 
 <https://developers.google.com/search/reference/robots_txt>
