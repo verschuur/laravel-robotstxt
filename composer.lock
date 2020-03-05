@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "9c29ff4ba88ca98b24d6b86d9bc578c4",
+    "content-hash": "38ec0a125e12558441d72352ea8f6b73",
     "packages": [
         {
             "name": "doctrine/inflector",
@@ -249,16 +249,16 @@
         },
         {
             "name": "laravel/framework",
-            "version": "7.x-dev",
+            "version": "v7.0.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "fe08478f8c679c012b571c456e53a89812ebc619"
+                "reference": "b93848b43f1564521b3f0605f06a1b392391f6ff"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/fe08478f8c679c012b571c456e53a89812ebc619",
-                "reference": "fe08478f8c679c012b571c456e53a89812ebc619",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/b93848b43f1564521b3f0605f06a1b392391f6ff",
+                "reference": "b93848b43f1564521b3f0605f06a1b392391f6ff",
                 "shasum": ""
             },
             "require": {
@@ -349,7 +349,7 @@
                 "ext-redis": "Required to use the Redis cache and queue drivers.",
                 "filp/whoops": "Required for friendly error pages in development (^2.4).",
                 "fzaninotto/faker": "Required to use the eloquent factory builder (^1.9.1).",
-                "guzzlehttp/guzzle": "Required to use the Mailgun mail driver and the ping methods on schedules (^6.3|^7.0).",
+                "guzzlehttp/guzzle": "Required to use the HTTP Client, Mailgun mail driver and the ping methods on schedules (^6.3|^7.0).",
                 "laravel/tinker": "Required to use the tinker console command (^2.0).",
                 "league/flysystem-aws-s3-v3": "Required to use the Flysystem S3 driver (^1.0).",
                 "league/flysystem-cached-adapter": "Required to use the Flysystem cache (^1.0).",
@@ -396,7 +396,7 @@
                 "framework",
                 "laravel"
             ],
-            "time": "2020-03-03T01:37:00+00:00"
+            "time": "2020-03-04T22:37:20+00:00"
         },
         {
             "name": "league/commonmark",
@@ -2955,22 +2955,22 @@
         },
         {
             "name": "orchestra/testbench",
-            "version": "v5.0.0",
+            "version": "v5.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/orchestral/testbench.git",
-                "reference": "5935a3395b309c00d570f534e9091f30fca13dfa"
+                "reference": "3847c2230b45fb16a445b95b628ccd3517e39625"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/orchestral/testbench/zipball/5935a3395b309c00d570f534e9091f30fca13dfa",
-                "reference": "5935a3395b309c00d570f534e9091f30fca13dfa",
+                "url": "https://api.github.com/repos/orchestral/testbench/zipball/3847c2230b45fb16a445b95b628ccd3517e39625",
+                "reference": "3847c2230b45fb16a445b95b628ccd3517e39625",
                 "shasum": ""
             },
             "require": {
-                "laravel/framework": "^7.0",
+                "laravel/framework": "^7.0.1",
                 "mockery/mockery": "^1.3.1",
-                "orchestra/testbench-core": "^5.0",
+                "orchestra/testbench-core": "^5.0.1",
                 "php": ">=7.2.5",
                 "phpunit/phpunit": "^8.4 || ^9.0"
             },
@@ -3001,20 +3001,20 @@
                 "orchestral",
                 "testing"
             ],
-            "time": "2020-02-29T07:07:30+00:00"
+            "time": "2020-03-03T14:33:51+00:00"
         },
         {
             "name": "orchestra/testbench-core",
-            "version": "v5.0.0",
+            "version": "v5.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/orchestral/testbench-core.git",
-                "reference": "dba2299ff449dce2681c21c05b284308bb68e3c2"
+                "reference": "2bf166beb0a7407acd312ffb75bf4917ec9a41e5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/orchestral/testbench-core/zipball/dba2299ff449dce2681c21c05b284308bb68e3c2",
-                "reference": "dba2299ff449dce2681c21c05b284308bb68e3c2",
+                "url": "https://api.github.com/repos/orchestral/testbench-core/zipball/2bf166beb0a7407acd312ffb75bf4917ec9a41e5",
+                "reference": "2bf166beb0a7407acd312ffb75bf4917ec9a41e5",
                 "shasum": ""
             },
             "require": {
@@ -3023,7 +3023,7 @@
             },
             "require-dev": {
                 "laravel/framework": "^7.0",
-                "laravel/laravel": "dev-develop",
+                "laravel/laravel": "dev-master",
                 "mockery/mockery": "^1.3.1",
                 "orchestra/canvas": "^5.0",
                 "phpunit/phpunit": "^8.4 || ^9.0"
@@ -3067,7 +3067,7 @@
                 "orchestral",
                 "testing"
             ],
-            "time": "2020-03-02T11:19:35+00:00"
+            "time": "2020-03-03T14:02:06+00:00"
         },
         {
             "name": "phar-io/manifest",
@@ -3324,16 +3324,16 @@
         },
         {
             "name": "phpspec/prophecy",
-            "version": "v1.10.2",
+            "version": "v1.10.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpspec/prophecy.git",
-                "reference": "b4400efc9d206e83138e2bb97ed7f5b14b831cd9"
+                "reference": "451c3cd1418cf640de218914901e51b064abb093"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpspec/prophecy/zipball/b4400efc9d206e83138e2bb97ed7f5b14b831cd9",
-                "reference": "b4400efc9d206e83138e2bb97ed7f5b14b831cd9",
+                "url": "https://api.github.com/repos/phpspec/prophecy/zipball/451c3cd1418cf640de218914901e51b064abb093",
+                "reference": "451c3cd1418cf640de218914901e51b064abb093",
                 "shasum": ""
             },
             "require": {
@@ -3383,7 +3383,7 @@
                 "spy",
                 "stub"
             ],
-            "time": "2020-01-20T15:57:02+00:00"
+            "time": "2020-03-05T15:02:03+00:00"
         },
         {
             "name": "phpstan/phpstan",
@@ -4529,9 +4529,9 @@
         }
     ],
     "aliases": [],
-    "minimum-stability": "dev",
+    "minimum-stability": "stable",
     "stability-flags": [],
-    "prefer-stable": true,
+    "prefer-stable": false,
     "prefer-lowest": false,
     "platform": [],
     "platform-dev": []

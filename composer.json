@@ -37,7 +37,5 @@
                 "Verschuur\\Laravel\\RobotsTxt\\Providers\\RobotsTxtProvider"
             ]
         }
-    },
-    "minimum-stability": "dev",
-    "prefer-stable": true
+    }
 }
