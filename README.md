@@ -66,7 +66,7 @@ User-agent: *
 Disallow: /
 ```
 
-This will allow the default install to allow all robots on a production environment, while disallowing robots on every other environment. If you do not define an environment in this file, the default will always be to disallow all bots for all paths.
+This will allow the default install to allow all robots on a production environment, while disallowing robots on every other environment.
 
 ## Custom settings
 
@@ -101,6 +101,8 @@ In which:
 - `allow`: all entries which will be used by the `allow` directive.
 
 By default, the environment name is set to `production` with a robot name of `*` and a disallow entry consisting of an empty string. This will allow all bots to access all paths on the production environment.
+
+**Note:** If you do not define any environments in this configuration file (i.e. an empty configuration), the default will always be to disallow all bots for all paths.
 
 ## Examples
 
