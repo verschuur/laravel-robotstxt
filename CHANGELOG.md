@@ -4,6 +4,22 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/) and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [4.0.0] - 2022-04-05
+
+### Added
+
+- Laravel 9 support
+- PHP 7.3 as a dependency as Laravel 8 still supports it
+
+### Changed
+
+- PHPUnit configuration
+- Analysis script alias
+  
+### Removed
+
+- Laravel 5, 6 and 7 support as they are no longer officialy supported
+  
 ## [3.1.0] - 2020-09-30
 
 ### Added
