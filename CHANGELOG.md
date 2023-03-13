@@ -4,6 +4,16 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/) and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [5.0.0] - 2023-03-13
+
+### Added
+
+- Laravel 10 support
+
+### Removed
+
+- Laravel 8 support as it is EOL
+
 ## [4.0.0] - 2022-04-05
 
 ### Added
@@ -18,7 +28,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
   
 ### Removed
 
-- Laravel 5, 6 and 7 support as they are no longer officialy supported
+- Laravel 5, 6 and 7 support as they are no longer officially supported
   
 ## [3.1.0] - 2020-09-30
 
