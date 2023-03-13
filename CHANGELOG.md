@@ -4,6 +4,12 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/) and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [5.0.2] - 2023-03-13
+
+### Changed
+
+- Migrate PHPUnit config file to PHPUnit 10
+
 ## [5.0.1] - 2023-03-13
 
 ### Changed
