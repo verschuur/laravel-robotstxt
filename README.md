@@ -73,7 +73,7 @@ This will allow the default install to allow all robots on a production environm
 If you need custom sitemap entries, publish the configuration file
 
 ```bash
-php artisan vendor:publish --provider="Verschuur\Laravel\RobotsTxt\RobotsTxtProvider"
+php artisan vendor:publish --provider="Verschuur\Laravel\RobotsTxt\Providers\RobotsTxtProvider"
 ```
 
 This will copy the `robots-txt.php` config file to your app's `config` folder. In this file you will find the following array structure
