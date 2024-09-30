@@ -73,7 +73,7 @@ This will allow the default install to allow all robots on a production environm
 If you need custom sitemap entries, publish the configuration file
 
 ```bash
-php artisan vendor:publish --provider="Verschuur\Laravel\RobotsTxt\RobotsTxtProvider"
+php artisan vendor:publish --provider="Verschuur\Laravel\RobotsTxt\Providers\RobotsTxtProvider"
 ```
 
 This will copy the `robots-txt.php` config file to your app's `config` folder. In this file you will find the following array structure
@@ -210,7 +210,7 @@ Because sitemaps always need to an absolute url, they are automatically wrapped 
 
 # Compatiblility
 
-This package is compatible with Laravel 9 and 10. For a complete overview of supported Laravel and PHP versions, please refer to the ['Run test' workflow](https://github.com/verschuur/laravel-robotstxt/actions).
+This package is compatible with Laravel 9, 10 and 11. For a complete overview of supported Laravel and PHP versions, please refer to the ['Run test' workflow](https://github.com/verschuur/laravel-robotstxt/actions).
 
 # Testing
 
