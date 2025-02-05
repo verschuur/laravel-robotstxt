@@ -210,7 +210,7 @@ Because sitemaps always need to an absolute url, they are automatically wrapped 
 
 # Compatiblility
 
-This package is compatible with Laravel 9, 10 and 11. For a complete overview of supported Laravel and PHP versions, please refer to the ['Run test' workflow](https://github.com/verschuur/laravel-robotstxt/actions).
+This package is compatible with Laravel 9, 10, 11 and 12. For a complete overview of supported Laravel and PHP versions, please refer to the ['Run test' workflow](https://github.com/verschuur/laravel-robotstxt/actions).
 
 # Testing
 

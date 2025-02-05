@@ -9,7 +9,7 @@ jobs:
     strategy:
       matrix:
         php: [ 8.0, 8.1, 8.2 ]
-        laravel: [ '9.*', '10.*', '11.*' ]
+        laravel: [ '9.*', '10.*', '11.*', '12.*' ]
         dependency-version: [ prefer-lowest, prefer-stable ]
         include:
           - laravel: 10.*
@@ -21,12 +21,17 @@ jobs:
           - laravel: 11.*
             testbench: 9.*
             phpunit: 10.*
+          - laravel: 12.*
+            testbench: 10.*
+            phpunit: 11.*
         exclude:
           - laravel: 10.*
             php: 8.0
           - laravel: 11.*
             php: 8.0
           - laravel: 11.*
+            php: 8.1
+          - laravel: 12.*
             php: 8.1
 
     name: P${{ matrix.php }} - L${{ matrix.laravel }} - ${{ matrix.dependency-version }} - ${{ matrix.os }}
