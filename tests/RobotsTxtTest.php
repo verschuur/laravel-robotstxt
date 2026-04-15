@@ -6,7 +6,7 @@ namespace Verschuur\Laravel\RobotsTxt\Tests;
 use Verschuur\Laravel\RobotsTxt\Controllers\RobotsTxtController;
 use Orchestra\Testbench\TestCase;
 
-class RobotsTxtTest extends TestCase
+final class RobotsTxtTest extends TestCase
 {
     protected function setUp(): void
     {
@@ -16,7 +16,7 @@ class RobotsTxtTest extends TestCase
     /**
      * Test that given an environment of 'production', it returns the default allow all
      */
-    public function test_has_default_response_for_production_env()
+    public function test_has_default_response_for_production_env(): void
     {
         $this->app['config']->set('app.env', 'production');
 
@@ -32,7 +32,7 @@ class RobotsTxtTest extends TestCase
     /**
      * Test that given any other environment than 'production', it returns the default allow none
      */
-    public function test_has_default_response_for_non_production_env()
+    public function test_has_default_response_for_non_production_env(): void
     {
         $this->app['config']->set('app.env', 'staging');
 
@@ -45,7 +45,7 @@ class RobotsTxtTest extends TestCase
     /**
      * Test that custom paths will overwrite the defaults
      */
-    public function test_shows_custom_set_paths()
+    public function test_shows_custom_set_paths(): void
     {
         $paths = [
             '*' => [
@@ -72,7 +72,7 @@ class RobotsTxtTest extends TestCase
     /**
      * Test that given multiple user agents, it will return multiple user agent entries
      */
-    public function test_shows_multiple_user_agents()
+    public function test_shows_multiple_user_agents(): void
     {
         $bots = [
             'bot1' => [],
@@ -98,7 +98,7 @@ class RobotsTxtTest extends TestCase
      * Test that given multiple paths for a user agent,
      * it will return multiple path entries for a single user agent entry
      */
-    public function test_shows_multiple_paths_per_agent()
+    public function test_shows_multiple_paths_per_agent(): void
     {
         $paths = [
             'bender' => [
@@ -132,7 +132,7 @@ class RobotsTxtTest extends TestCase
      * Test that given multiple paths for multiple user agents,
      * it will return multiple path entries for multiple user agent entries
      */
-    public function test_shows_multiple_paths_for_multiple_agents()
+    public function test_shows_multiple_paths_for_multiple_agents(): void
     {
         $paths = [
             'bender' => [
@@ -181,7 +181,7 @@ class RobotsTxtTest extends TestCase
     /**
      * Test that given multiple environments, it returns the correct path for the given environment
      */
-    public function test_shows_correct_paths_for_multiple_environments()
+    public function test_shows_correct_paths_for_multiple_environments(): void
     {
         $environments = [
             'production' => [
@@ -234,13 +234,13 @@ class RobotsTxtTest extends TestCase
         $response->assertDontSeeText('Disallow: /' . PHP_EOL);
     }
 
-    public function test_output_content_type_is_text_plain_utf_eight()
+    public function test_output_content_type_is_text_plain_utf_eight(): void
     {
         $response = $this->get('/robots.txt');
         $response->assertHeader('Content-Type', 'text/plain; charset=UTF-8');
     }
 
-    public function test_shows_sitemaps()
+    public function test_shows_sitemaps(): void
     {
         $sitemaps = [
             'sitemap-foo.xml',
