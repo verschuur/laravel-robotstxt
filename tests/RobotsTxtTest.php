@@ -6,7 +6,7 @@ namespace Verschuur\Laravel\RobotsTxt\Tests;
 use Verschuur\Laravel\RobotsTxt\Controllers\RobotsTxtController;
 use Orchestra\Testbench\TestCase;
 
-class RobotsTxtTest extends TestCase
+final class RobotsTxtTest extends TestCase
 {
     protected function setUp(): void
     {
