@@ -14,8 +14,8 @@
     ],
     "require": {
         "php": "^8.3",
-        "laravel/framework": "13",
-        "orchestra/testbench": "11"
+        "laravel/framework": "^13.0.0",
+        "orchestra/testbench": "^11"
     },
     "autoload": {
         "psr-4": {
