@@ -4,6 +4,12 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/) and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [5.3.0] - 2025-06-28
+
+### Added
+
+- Laravel 13 support (thanks [IT-Joris](https://github.com/IT-Joris) and [Levib](https://github.com/Levivb))
+
 ## [5.2.0] - 2025-02-25
 
 ### Added
