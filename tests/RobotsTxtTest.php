@@ -26,7 +26,7 @@ final class RobotsTxtTest extends TestCase
             'User-agent: *',
             'Disallow: '
         ]);
-        $response->assertDontSeeText('Disallow: /'  . PHP_EOL);
+        $response->assertDontSee('Disallow: /'  . PHP_EOL);
     }
 
     /**
@@ -39,7 +39,7 @@ final class RobotsTxtTest extends TestCase
         $response = $this->get('/robots.txt');
 
         $response->assertSeeText('User-agent: *' . PHP_EOL . 'Disallow: /');
-        $response->assertDontSeeText('Disallow:  ' . PHP_EOL);
+        $response->assertDontSee('Disallow:  ' . PHP_EOL);
     }
 
     /**
@@ -66,7 +66,7 @@ final class RobotsTxtTest extends TestCase
             'User-agent: *'. PHP_EOL,
             'Disallow: /foobar' . PHP_EOL,
             'Allow: /fizzbuzz']);
-        $response->assertDontSeeText('Disallow:  ' . PHP_EOL);
+        $response->assertDontSee('Disallow:  ' . PHP_EOL);
     }
 
     /**
@@ -90,8 +90,8 @@ final class RobotsTxtTest extends TestCase
             'User-agent: bot1',
             'User-agent: bot2'
         ]);
-        $response->assertDontSeeText('Disallow:  ' . PHP_EOL);
-        $response->assertDontSeeText('Disallow: /' . PHP_EOL);
+        $response->assertDontSee('Disallow:  ' . PHP_EOL);
+        $response->assertDontSee('Disallow: /' . PHP_EOL);
     }
 
     /**
@@ -124,8 +124,8 @@ final class RobotsTxtTest extends TestCase
             'Allow: /fizzbuzz' . PHP_EOL,
             'Allow: /buzzfizz' . PHP_EOL,
         ]);
-        $response->assertDontSeeText('Disallow:  ' . PHP_EOL);
-        $response->assertDontSeeText('Disallow: /' . PHP_EOL);
+        $response->assertDontSee('Disallow:  ' . PHP_EOL);
+        $response->assertDontSee('Disallow: /' . PHP_EOL);
     }
 
     /**
@@ -174,8 +174,8 @@ final class RobotsTxtTest extends TestCase
             'Allow: /foobar' . PHP_EOL,
             'Allow: /barfoo' . PHP_EOL,
         ]);
-        $response->assertDontSeeText('Disallow:  ' . PHP_EOL);
-        $response->assertDontSeeText('Disallow: /' . PHP_EOL);
+        $response->assertDontSee('Disallow:  ' . PHP_EOL);
+        $response->assertDontSee('Disallow: /' . PHP_EOL);
     }
 
     /**
@@ -216,9 +216,9 @@ final class RobotsTxtTest extends TestCase
             'User-agent: *' . PHP_EOL,
             'Disallow: /foobar',
         ]);
-        $response->assertDontSeeText('Allow: /barfoo' . PHP_EOL);
-        $response->assertDontSeeText('Disallow:  ' . PHP_EOL);
-        $response->assertDontSeeText('Disallow: /' . PHP_EOL);
+        $response->assertDontSee('Allow: /barfoo' . PHP_EOL);
+        $response->assertDontSee('Disallow:  ' . PHP_EOL);
+        $response->assertDontSee('Disallow: /' . PHP_EOL);
 
         // Test env #2
         $this->app['config']->set('app.env', 'staging');
@@ -229,9 +229,10 @@ final class RobotsTxtTest extends TestCase
             'User-agent: *' . PHP_EOL,
             'Allow: /barfoo'
         ]);
-        $response->assertDontSeeText('Disallow: /foobar' . PHP_EOL);
-        $response->assertDontSeeText('Disallow:  ' . PHP_EOL);
-        $response->assertDontSeeText('Disallow: /' . PHP_EOL);
+
+        $response->assertDontSee('Disallow: /foobar' . PHP_EOL);
+        $response->assertDontSee('Disallow:  ' . PHP_EOL);
+        $response->assertDontSee('Disallow: /' . PHP_EOL);
     }
 
     public function test_output_content_type_is_text_plain_utf_eight(): void
