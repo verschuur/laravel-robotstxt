@@ -31,7 +31,7 @@ class RobotsTxtManager
         /**
          * Note that the config is originally loaded from this package's config file,
          * but a config file can be published to the Laravel config dir.
-         * If so, due to the nature of the config setup and Larvel's config merge,
+         * If so, due to the nature of the config setup and Laravel's config merge,
          * the original config gets completely overwritten.
          */
         $this->currentEnvironment = config('app.env');
@@ -119,8 +119,8 @@ class RobotsTxtManager
         $entries = [];
 
         foreach ($this->definedSitemaps as $sitemap) {
-            // Sitemaps should always use a absolute url.
-            // Combinding the sitemap paths with Laravel's url() function will do nicely.
+            // Sitemaps should always use an absolute url.
+            // Combining the sitemap paths with Laravel's url() function will do nicely.
             $entries[] = 'Sitemap: ' . url($sitemap);
         }
         
